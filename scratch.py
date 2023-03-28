@@ -19,6 +19,16 @@ class Channel:
         self.video_count = self.channel_info['items'][0]['statistics']['videoCount']
         self.view_count = self.channel_info['items'][0]['statistics']['viewCount']
 
+    def __str__(self):
+        return f'Youtube-канал: {self.title}'
+
+    def __add__(self, other):
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+
+    def __lt__(self, other):
+        return self.subscriber_count < other.subscriber_count
+
 
     def print_info(self):
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
@@ -38,7 +48,7 @@ class Channel:
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 #channel_id = 'UC1eFXmJNkjITxPFWTy6RsWg'    # Редакция
-# pivovarov = Channel('UC1eFXmJNkjITxPFWTy6RsWg')
+pivovarov = Channel('UC1eFXmJNkjITxPFWTy6RsWg')
 # #vdud = Channel('')
 # pivovarov.print_info()
 #vdud.print_info()
@@ -46,6 +56,8 @@ print("Task2:")
 vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
 
 print(vdud.url)
+print(vdud.subscriber_count)
+print(pivovarov.subscriber_count)
 # менять не можем
 # vdud.channel_id= 'Новое название'
 #
@@ -54,3 +66,12 @@ print(vdud.url)
 #
 # # создать файл 'vdud.json' в данными по каналу
 # vdud.to_json()
+
+print("Task3:")
+print(vdud)
+#Youtube-канал: вДудь
+print(pivovarov)
+#Youtube-канал: Редакция
+print(vdud > pivovarov)
+print(vdud < pivovarov)
+print(vdud + pivovarov)
